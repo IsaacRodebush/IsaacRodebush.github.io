@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      /* Set the size of the div element that contains the map */
+      #map {
+        height: 400px;  /* The height is 400 pixels */
+        width: 100%;  /* The width is the width of the web page */
+       }
+    </style>
+  </head>
+<body>
+    <h3>My Google Maps Demo</h3>
+    <!--The div element for the map -->
+    <div id="map"></div>
+    <script>
+// Initialize and add the map
+map=null;
+//marker=null;
+
+function initMap() {
+  // The location of Uluru
+  var uluru = {lat:-25.344 , lng: 131.036}; /*{lat: -25.344, lng: 131.036};*/
+  // The map, centered at Uluru
+   map = new google.maps.Map(
+      document.getElementById('map'), {zoom: 4, center: uluru});
+  // The marker, positioned at Uluru
+   var marker = new google.maps.Marker({position: uluru, map: map});
+}
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCEBfDUNSFG9FJfDxTw0MbBp5xIQOXkvzA&callback=initMap"> 
+    </script>
+
+
+
+
+
+
+
+	   <p>Click the button to get your coordinates.</p>
+
+<button onclick="getLocation()">Track Your Location</button>
+
+<p id="demo"></p>
+
+<script>
+var x = document.getElementById("demo");
+
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.watchPosition(doWorkWithPosition);
+  } else { 
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+
+//var moveSide = 0;
+
+function doWorkWithPosition(position) {
+  console.log("hello doWorkWithPosition");
+  //moveSide = moveSide + 0.01;
+    x.innerHTML="Latitude: " + position.coords.latitude + 
+    "<br>Longitude: " + position.coords.longitude;
+    // remove old marker
+    //marker.setMap(null);
+    // make a new marker at our new position
+    var marker = new google.maps.Marker(
+      {position: {
+        lat:position.coords.latitude + moveSide, 
+        lng: position.coords.longitude
+        }, 
+      map: map}
+      );
+    // get new center for map view
+    var center = new google.maps.LatLng(
+      position.coords.latitude + moveSide, 
+      position.coords.longitude
+      );
+    // recenter that hound dog
+    map.panTo(center);
+}
+
+</script>
+
+<h2>JavaScript Scope</h2>
+<p>A GLOBAL variable can be accessed from any script or function.</p>
+
+
+
+
+
+<p id="demo8"></p>
+
+<script>
+var carName = "37.43354";
+myFunction();
+
+function myFunction() {
+  document.getElementById("demo8").innerHTML = "longitude " + carName;
+}
+</script>
+    
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Find Locations Near you</title>
+	<link rel="stylesheet" type="text/css" href="GPS.css">
+</head>
+<body>
+
+	<img src="photo.jpg">
+
+	<p>Click below to find locations near you.</p>
+
+<button onclick="getLocation()">GPS Search</button>
+
+<p id="demo"></p>
+
+<script>
+var x = document.getElementById("demo");
+
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.watchPosition(showPosition);
+  } else { 
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+
+</script>
+
+
+
+</body>
+</html>
